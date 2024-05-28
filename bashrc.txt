@@ -1,4 +1,6 @@
-# USEFUL LINUX
+=========
+| LINUX |
+=========
 
 alias update-a='sudo apt update && sudo apt upgrade && sudo apt autoremove'
 alias rm-noex='find . -type f ! -name "*.?*" -delete'
@@ -18,7 +20,9 @@ md ()
 }
 
 
-# CLANG-FORMAT
+================
+| CLANG-FORMAT |
+================
 
 alias clang-format-all='find . -iname "*.cpp" -o -iname "*.hpp" -o -iname "*.h" | xargs clang-format -i'
 
@@ -28,7 +32,9 @@ clang-format-rec ()
 }
 
 
-# CONTAINER
+=============
+| CONTAINER |
+=============
 
 alias sc='sudo start_container'
 alias xsc='xhost + && sc'
@@ -42,8 +48,9 @@ if [ -d "/opt1/" ]; then
 fi
 
 
-
-# c++ COMPILE
+===============
+| c++ COMPILE |
+===============
 
 alias crrall='g++ *.cpp -o cpptemp && ./cpptemp && rm cpptemp'
 alias crrall-w='g++ -w *.cpp -o cpptemp && ./cpptemp && rm cpptemp'
@@ -80,7 +87,9 @@ ccrr ()
 }
 
 
-# MIPS COMPILE
+================
+| MIPS COMPILE |
+================
 
 alias ecrrall='ecc -target mipsel-linux-eng *.c -o cpptemp && ./cpptemp && rm cpptemp'
 alias eccrall='ecc++ -target mips32r2el-linux -O0 -g *.cpp *.s -o ecctemp && qemu-mipsel ecctemp && rm ecctemp'
@@ -97,25 +106,45 @@ mccrr ()
 }
 
 
-# MIPS DEBUG
+==============
+| MIPS DEBUG |
+==============
+
+# ecc-full kompajlira program i pokrece debuger
+#
+# Koristi se kao:
+# ecc-full FILES
+# npr: ecc-full test.s test.c
+#
+# default port je 1234, ukoliko je potreban neki 
+# drugi prosljedjuje se kao prvi argument komande
+#
+# Koristi se kao:
+# ecc-full PORT_NUMBER FILES
+# npr: ecc-full 9999 test.s test.c
 
 ecc-full ()
 {
-  ecc -target mips32r2el-linux -g $1 -o ${1%.*}
-  qemu-mipsel -g ${2:-1234} ${1%.*}&
-  gdb-multiarch -q ${1%.*}
+  regex='^[0-9]+$'
+  if [ $# -eq 0 ]; then
+    echo "Empty argument!"
+  elif ! [[ $1 =~ $regex ]] ; then
+    ecc -target mips32r2el-linux -g "$@" -o asmtemp
+    qemu-mipsel -g 1234 asmtemp&
+    gdb-multiarch -q asmtemp 
+    rm asmtemp
+  else
+    ecc -target mips32r2el-linux -g "$@" -o asmtemp
+    qemu-mipsel -g $1 asmtemp&
+    gdb-multiarch -q asmtemp 
+    rm asmtemp
+  fi
 }
 
-ecc-full-mult ()
-{
-  ecc -target mips32r2el-linux -g "$@" -o asmtemp
-  qemu-mipsel -g 1234 asmtemp&
-  gdb-multiarch -q asmtemp 
-  rm asmtemp
-}
 
-
-# MIPS DISASSEMBLY
+====================
+| MIPS DISASSEMBLY |
+====================
 
 mcl ()
 {
