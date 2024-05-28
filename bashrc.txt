@@ -1,0 +1,140 @@
+# USEFUL LINUX
+
+alias update-a='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+alias rm-noex='find . -type f ! -name "*.?*" -delete'
+alias sd='shutdown now'
+alias brc='. ~/.bashrc'
+alias brc-edit='nvim ~/.bashrc && brc'
+
+find-noerr ()
+{
+  find $1 -iname $2 2> >(grep -v 'Permission denied' >&2)
+}
+
+md ()
+{
+  mkdir $1
+  cd $1
+}
+
+
+# CLANG-FORMAT
+
+alias clang-format-all='find . -iname "*.cpp" -o -iname "*.hpp" -o -iname "*.h" | xargs clang-format -i'
+
+clang-format-rec ()
+{
+ find "$@" -iname "*.cpp" -o -iname "*.hpp" -o -iname "*.h" | xargs clang-format -i
+}
+
+
+# CONTAINER
+
+alias sc='sudo start_container'
+alias xsc='xhost + && sc'
+alias sclogisim='java -jar /opt/logisim/logisim-evolution.jar&'
+
+
+# c++ COMPILE
+
+alias crrall='g++ *.cpp -o cpptemp && ./cpptemp && rm cpptemp'
+alias crrall-w='g++ -w *.cpp -o cpptemp && ./cpptemp && rm cpptemp'
+alias crrall-a='g++ -fsanitize=address *.cpp -o cpptemp && ./cpptemp && rm cpptemp'
+
+crr-a ()
+{
+ g++ -fsanitize=address "$@" -o cpptemp && ./cpptemp && rm cpptemp   
+}
+
+crr-w ()
+{
+ g++ -w "$@" -o cpptemp && ./cpptemp && rm cpptemp   
+}
+
+crr ()
+{
+ g++ "$@" -o cpptemp && ./cpptemp && rm cpptemp   
+}
+
+ccrr-a ()
+{
+ clear && g++ -fsanitize=address "$@" -o cpptemp && ./cpptemp && rm cpptemp   
+}
+
+ccrr-w ()
+{
+ clear && g++ -w "$@" -o cpptemp && ./cpptemp && rm cpptemp   
+}
+
+ccrr ()
+{
+ clear && g++ "$@" -o cpptemp && ./cpptemp && rm cpptemp   
+}
+
+
+# MIPS COMPILE
+
+alias ecrrall='ecc -target mipsel-linux-eng *.c -o cpptemp && ./cpptemp && rm cpptemp'
+alias eccrall='ecc++ -target mips32r2el-linux -O0 -g *.cpp *.s -o ecctemp && qemu-mipsel ecctemp && rm ecctemp'
+alias mipsecc='ecc -target mips32r2el-linux'
+
+mcrr ()
+{
+ mipsecc "$@" -o asmtemp && qemu-mipsel asmtemp && rm asmtemp   
+}
+
+mccrr ()
+{
+ clear && mipsecc "$@" -o asmtemp && qemu-mipsel asmtemp && rm asmtemp   
+}
+
+
+# MIPS DEBUG
+
+ecc-full ()
+{
+  ecc -target mips32r2el-linux -g $1 -o ${1%.*}
+  qemu-mipsel -g ${2:-1234} ${1%.*}&
+  gdb-multiarch -q ${1%.*}
+}
+
+ecc-full-mult ()
+{
+  ecc -target mips32r2el-linux -g "$@" -o asmtemp
+  qemu-mipsel -g 1234 asmtemp&
+  gdb-multiarch -q asmtemp 
+  rm asmtemp
+}
+
+
+# MIPS DISASSEMBLY
+
+mcl ()
+{
+  if [[ $# -eq 1 ]]; then
+    mipsecc $1 -c -o asmtemp.o 
+    ecc-objdump -s asmtemp.o 
+    rm asmtemp.o
+  elif [[ $# -eq 2 ]]; then
+    mipsecc $1 -c -o asmtemp.o 
+    ecc-objdump -s -j $2 asmtemp.o 
+    rm asmtemp.o
+  else
+    echo "Invalid number of arguments"
+  fi
+}
+
+mcll ()
+{
+  if [[ $# -eq 1 ]]; then
+    mipsecc $1 -o asmtemp
+    ecc-objdump -s asmtemp
+    rm asmtemp
+  elif [[ $# -eq 2 ]]; then
+    mipsecc $1 -o asmtemp
+    ecc-objdump -s -j $2 asmtemp
+    rm asmtemp
+  else
+    echo "Invalid number of arguments"
+  fi
+}

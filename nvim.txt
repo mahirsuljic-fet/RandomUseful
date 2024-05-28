@@ -1,0 +1,45 @@
+============
+| WEBSITES |
+============
+
+CONFIGS
+https://nvchad.com/docs/quickstart/install/
+https://github.com/nvim-lua/kickstart.nvim/
+
+NVCHAD HELPFUL
+https://blog.spoonconsulting.com/getting-started-with-neovim-using-nvchad-a-developers-guide-f97d81e85d60
+
+PLUGINS
+https://github.com/rockerBOO/awesome-neovim
+
+CUSTOM SNIPPETS
+https://www.youtube.com/watch?v=FmHhonPjvvA
+https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md
+https://sbulav.github.io/vim/neovim-setting-up-luasnip/
+
+
+=========================
+| FILES AND DIRECTORIES |
+=========================
+
+Plugins:  ~/.config/nvim/lua/custom/plugins.lua
+Snippets: ~/.local/share/nvim/lazy/LuaSnip/plugin/
+LSP:      ~/.config/nvim/lua/custom/configs/ (overrides.lua && lspconfig.lua)
+
+
+============
+| PROBLEMS |
+============
+
+NVCHAD WARNING MULTIPLE DIFFERENT CLIENT OFFSET SOLUTION
+~/.local/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations/clangd.lua
+...
+local default_capabilities = {
+  textDocument = {
+    completion = {
+      editsNearCursor = true,
+    },
+  },
+  offsetEncoding = { 'utf-8', 'utf-16' },
+}
+...
