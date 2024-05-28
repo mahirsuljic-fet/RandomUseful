@@ -34,6 +34,14 @@ alias sc='sudo start_container'
 alias xsc='xhost + && sc'
 alias sclogisim='java -jar /opt/logisim/logisim-evolution.jar&'
 
+# AUTO SCRIPT LOAD AND TMUX
+if [ -d "/opt1/" ]; then
+  export TERM=xterm-256color
+  source /opt1/script.sh
+  [ -z "$TMUX" ] && exec tmux
+fi
+
+
 
 # c++ COMPILE
 
