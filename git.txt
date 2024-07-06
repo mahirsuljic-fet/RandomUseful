@@ -2,4 +2,11 @@
 | SSH KEY |
 ===========
 
+# Setup
 https://gist.github.com/xirixiz/b6b0c6f4917ce17a90e00f9b60566278?permalink_comment_id=4190692
+
+# Use ssh key in current repository
+git remote set-url origin git@github.com:USERNAME/REPOSITORY.git
+
+# Markdown cheatsheet
+https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
