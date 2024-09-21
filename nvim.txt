@@ -18,16 +18,13 @@ https://github.com/L3MON4D3/LuaSnip/blob/master/DOC.md
 https://sbulav.github.io/vim/neovim-setting-up-luasnip/
 
 
-=========================
-| FILES AND DIRECTORIES |
-=========================
+==================================
+| FILES AND DIRECTORIES (NvChad) |
+==================================
 
-Plugins:            ~/.config/nvim/lua/custom/plugins.lua
 Snippets:           ~/.local/share/nvim/lazy/LuaSnip/plugin/
-LSP:                ~/.config/nvim/lua/custom/configs/ (overrides.lua && lspconfig.lua)
 clangd LSP:         ~/.local/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations/clangd.lua
-Comment strings:    ~/.local/share/nvim/lazy/Comment.nvim/lua/Comment/ft.lua
-VIM startup config: ~/.config/nvim/lua/plugins/configs/others.lua     (svi set-ovi su unutar vim.o objekta (npr. vim.o.NAME=VALUE))
+Custom settings:    ~/.config/nvim/lua/options.lua     (svi set-ovi su unutar vim.o objekta (vim.o.NAME = VALUE, npr. vim.o.relativenumber = true))
 
 
 ============
@@ -35,6 +32,9 @@ VIM startup config: ~/.config/nvim/lua/plugins/configs/others.lua     (svi set-o
 ============
 
 # NVCHAD WARNING MULTIPLE DIFFERENT CLIENT OFFSET SOLUTION (clangd LSP)
+
+~/.local/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations/clangd.lua
+
 ...
 local default_capabilities = {
   textDocument = {
