@@ -175,3 +175,53 @@ mcll ()
     echo "Invalid number of arguments"
   fi
 }
+
+
+======
+| F# |
+======
+
+# COMPILE AND RUN F# FILE OR PROJECT
+# USAGE:
+# fsrun FILENAME.fsx
+# fsrun FILENAME.fs
+# fsrun 
+
+fsrun ()
+{
+  if [ $# -eq 0 ]; then
+    dotnet run
+  elif [ $# -eq 1 ]; then
+    if [[ "$1" == *.fsx ]]; then
+      dotnet fsi $1
+    elif [[ "$1" == *.fs ]]; then
+      if [ ! -f ./fstemp.fsx ]; then
+        cp $1 FSTemp.fsx
+        dotnet fsi FSTemp.fsx
+        rm FSTemp.fsx
+      else
+        dotnet fsi < $1
+      fi
+    else
+      echo "Wrong file type!"
+    fi
+  else
+    echo "Too many arguments!"
+  fi
+}
+
+# MAKE NEW F# PROJECT
+# USAGE:
+# fsnew PROJECTNAME
+
+fsnew ()
+{
+  if [ $# -eq 0 ]; then
+    echo "Empty argument!"
+  elif [ $# -eq 1 ]; then
+    dotnet new console -lang "F#" -o $1
+  else
+    echo "Too many arguments!"
+  fi
+}
+
