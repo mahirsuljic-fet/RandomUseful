@@ -1,128 +1,172 @@
-=========
-| LINUX |
-=========
+# General
 
+``` bash
 alias update-a='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+```
+``` bash
 alias rm-noex='find . -type f ! -name "*.?*" -delete'
+```
+``` bash
 alias sd='shutdown now'
+```
+``` bash
 alias brc='. ~/.bashrc'
+```
+``` bash
 alias brc-edit='nvim ~/.bashrc && brc'
+```
 
+``` bash
 find-noerr ()
 {
   find $1 -iname $2 2> >(grep -v 'Permission denied' >&2)
 }
+```
 
+``` bash
 md ()
 {
   mkdir $1
   cd $1
 }
+```
 
 
-================
-| CLANG-FORMAT |
-================
+# Clang-format
 
+``` bash
 alias clang-format-all='find . -iname "*.cpp" -o -iname "*.hpp" -o -iname "*.h" | xargs clang-format -i'
+```
 
+``` bash
 clang-format-rec ()
 {
  find "$@" -iname "*.cpp" -o -iname "*.hpp" -o -iname "*.h" | xargs clang-format -i
 }
+```
 
 
-=============
-| CONTAINER |
-=============
+# Container
 
+``` bash
 alias sc='sudo start_container'
+```
+``` bash
 alias xsc='xhost + && sc'
+```
+``` bash
 alias sclogisim='java -jar /opt/logisim/logisim-evolution.jar&'
+```
 
-# AUTO SCRIPT LOAD AND TMUX
+## Auto script load and tmux
+``` bash
 if [ -d "/opt1/" ]; then
   export TERM=xterm-256color
   source /opt1/script.sh
   [ -z "$TMUX" ] && exec tmux
 fi
+```
 
 
-===============
-| c++ COMPILE |
-===============
+# c++
 
+``` bash
 alias crrall='g++ *.cpp -o cpptemp && ./cpptemp && rm cpptemp'
+```
+``` bash
 alias crrall-w='g++ -w *.cpp -o cpptemp && ./cpptemp && rm cpptemp'
+```
+``` bash
 alias crrall-a='g++ -fsanitize=address *.cpp -o cpptemp && ./cpptemp && rm cpptemp'
+```
 
+``` bash
 crr-a ()
 {
  g++ -fsanitize=address "$@" -o cpptemp && ./cpptemp && rm cpptemp   
 }
+```
 
+``` bash
 crr-w ()
 {
  g++ -w "$@" -o cpptemp && ./cpptemp && rm cpptemp   
 }
+```
 
+``` bash
 crr ()
 {
  g++ "$@" -o cpptemp && ./cpptemp && rm cpptemp   
 }
+```
 
+``` bash
 ccrr-a ()
 {
  clear && g++ -fsanitize=address "$@" -o cpptemp && ./cpptemp && rm cpptemp   
 }
+```
 
+``` bash
 ccrr-w ()
 {
  clear && g++ -w "$@" -o cpptemp && ./cpptemp && rm cpptemp   
 }
+```
 
+``` bash
 ccrr ()
 {
  clear && g++ "$@" -o cpptemp && ./cpptemp && rm cpptemp   
 }
+```
 
 
-================
-| MIPS COMPILE |
-================
+# Arhitektura racunara (MIPS)
 
+### MIPS compile
+
+``` bash
 alias ecrrall='ecc -target mipsel-linux-eng *.c -o cpptemp && ./cpptemp && rm cpptemp'
+```
+``` bash
 alias eccrall='ecc++ -target mips32r2el-linux -O0 -g *.cpp *.s -o ecctemp && qemu-mipsel ecctemp && rm ecctemp'
+```
+``` bash
 alias mipsecc='ecc -target mips32r2el-linux'
+```
 
+``` bash
 mcrr ()
 {
  mipsecc "$@" -o asmtemp && qemu-mipsel asmtemp && rm asmtemp   
 }
+```
 
+``` bash
 mccrr ()
 {
  clear && mipsecc "$@" -o asmtemp && qemu-mipsel asmtemp && rm asmtemp   
 }
+```
 
 
-==============
-| MIPS DEBUG |
-==============
+### MIPS debug
 
-# ecc-full kompajlira program i pokrece debuger
-#
-# Koristi se kao:
-# ecc-full FILES
-# npr: ecc-full test.s test.c
-#
-# default port je 1234, ukoliko je potreban neki 
-# drugi prosljedjuje se kao prvi argument komande
-#
-# Koristi se kao:
-# ecc-full PORT_NUMBER FILES
-# npr: ecc-full 9999 test.s test.c
+ecc-full kompajlira program i pokrece debuger
 
+Koristi se kao: \
+`ecc-full FILES` \
+npr: `ecc-full test.s test.c`
+
+Default port je 1234, ukoliko je potreban neki drugi prosljedjuje se kao prvi argument komande.
+
+Koristi se kao: \
+`ecc-full PORT_NUMBER FILES` \
+npr: `ecc-full 9999 test.s test.c`
+
+``` bash
 ecc-full ()
 {
   regex='^[0-9]+$'
@@ -140,12 +184,12 @@ ecc-full ()
     rm asmtemp
   fi
 }
+```
 
 
-====================
-| MIPS DISASSEMBLY |
-====================
+### MIPS disassembly
 
+``` bash
 mcl ()
 {
   if [[ $# -eq 1 ]]; then
@@ -160,7 +204,9 @@ mcl ()
     echo "Invalid number of arguments"
   fi
 }
+```
 
+``` bash
 mcll ()
 {
   if [[ $# -eq 1 ]]; then
@@ -175,18 +221,18 @@ mcll ()
     echo "Invalid number of arguments"
   fi
 }
+```
 
 
-======
-| F# |
-======
+# Funkcionalno programiranje (F#)
 
-# COMPILE AND RUN F# FILE OR PROJECT
-# USAGE:
-# fsrun FILENAME.fsx
-# fsrun FILENAME.fs
-# fsrun 
+### Compile and run f# file or project
+Usage: \
+`fsrun FILENAME.fsx` \
+`fsrun FILENAME.fs` \
+`fsrun` 
 
+``` bash
 fsrun ()
 {
   if [ $# -eq 0 ]; then
@@ -209,11 +255,12 @@ fsrun ()
     echo "Too many arguments!"
   fi
 }
+```
 
-# MAKE NEW F# PROJECT
-# USAGE:
-# fsnew PROJECTNAME
+### Make new F# project
+Usage: `fsnew PROJECTNAME`
 
+``` bash
 fsnew ()
 {
   if [ $# -eq 0 ]; then
@@ -224,4 +271,4 @@ fsnew ()
     echo "Too many arguments!"
   fi
 }
-
+```

@@ -1,52 +1,46 @@
-https://visualgdb.com/gdbreference/commands/
+### [GDB reference](https://visualgdb.com/gdbreference/commands/)
 
-==========================
-| KONTROLA TOKA PROGRAMA |
-==========================
+## Kontrola toka programa
 
-# Breakpoint (zaustavi izvrsenje programa na LABEL, npr. ime funkcije kao main ili slicno)
-break LABEL
-b LABEL       (skracenica)
+### Breakpoint (zaustavi izvrsenje programa na LABEL, npr. ime funkcije kao main ili slicno)
+`break LABEL`\
+`b LABEL`       (skracenica)
 
-# Continue (nastavi izvrsenje programa (do kraja ili do sljedeceg breakpoint-a))
-continue
-c             (skracenica)
+### Continue (nastavi izvrsenje programa (do kraja ili do sljedeceg breakpoint-a))
+`continue` \
+`c`             (skracenica)
 
-# Next Instruction (izvrsi narednu instrukciju)
-ni
+### Next Instruction (izvrsi narednu instrukciju)
+`ni`
 
 
-===========
-| LAYOUTS |
-===========
+## LAYOUTS
 
-# Source code
-layout src
+### Source code
+`layout src`
 
-# Registers
-layout regs
-layout r      (skracenica)
+### Registers
+`layout regs` \
+`layout r`      (skracenica)
 
 
-=========
-| PRINT |
-=========
+## Print
 
 https://visualgdb.com/gdbreference/commands/print
 
-# FORMATI
-o - octal
-x - hexadecimal
-u - unsigned decimal
-t - binary
-f - floating point
-a - address
-c - char
+### FORMATI
+o - octal \
+x - hexadecimal \
+u - unsigned decimal \
+t - binary \
+f - floating point \
+a - address \
+c - char \
 s - string
 
-# Print register
-print /FORMAT $GP
+### Print register
+`print /FORMAT $GP`
 
-~Primjer~
-print /x $a0
-print $a0     (moze se izostaviti, koristi cjelobrojni format)
+Primjer:
+`print /x $a0` \
+`print $a0`     (moze se izostaviti, koristi cjelobrojni format)
