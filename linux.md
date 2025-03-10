@@ -6,3 +6,5 @@
 Add `export EDITOR=path_to_app` in `~/.bashrc` (for example `export EDITOR=/snap/bin/nvim`). \
 [URL 1](https://superuser.com/questions/168702/how-do-i-change-the-default-text-editor-in-ubuntu) \
 [URL 2](https://askubuntu.com/questions/13447/how-do-i-change-the-default-text-editor)
+
+### [Wireshark - no interfaces](https://askubuntu.com/questions/348712/there-are-no-interfaces-on-which-a-capture-can-be-done)
